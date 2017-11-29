@@ -1,0 +1,7 @@
+2017/11/28: 07.52.10 (LOCAL)	Created from /d_drive/USR/code/PHP/QuoteStat04
+2017/11/28: 08.29.58 (LOCAL)	Implemented common, abstract base-class for an HTML forms processor.
+2017/11/28: 09.59.08 (LOCAL)	Basic navigation + framework testing okay: Account Creation, Event Creation, and Timesheet / Reporting.
+2017/11/28: 11.45.37 (LOCAL)	Implementing event creation - needs allot of work - !
+2017/11/29: 06.51.05 (LOCAL)	NOTE: FORMS POSTED TEXTAREA PAYLOADS HAVE BOTH \r and \n 
+2017/11/29: 06.57.02 (LOCAL)	NOTE: Prepared statements use bindParam in PHP for SQLITE3.
+2017/11/29: 11.45.54 (LOCAL)	Event Create, Update, and Delete - by GUID - CodeEvent.php Form - Testing Success.
