@@ -23,7 +23,8 @@ class DbUser extends DbPublic {
             $cmd->bindParam(':localtime', $event->localtime, SQLITE3_TEXT);
             $cmd->bindParam(':stars', $event->stars, SQLITE3_INTEGER);
             $cmd->bindParam(':subject', $event->subject, SQLITE3_TEXT);
-            $cmd->bindParam(':message', DbPublic::Normalize($event->message), SQLITE3_TEXT);
+            $dum = DbPublic::Normalize($event->message);
+            $cmd->bindParam(':message', $dum, SQLITE3_TEXT);
             $br = $cmd->execute();
         } catch (Exception $ex) {
             HtmlEcho($ex->getMessage());
@@ -46,7 +47,8 @@ class DbUser extends DbPublic {
                 $cmd->bindParam(':localtime', $event->localtime, SQLITE3_TEXT);
                 $cmd->bindParam(':stars', $event->stars, SQLITE3_INTEGER);
                 $cmd->bindParam(':subject', $event->subject, SQLITE3_TEXT);
-                $cmd->bindParam(':message', DbPublic::Normalize($event->message), SQLITE3_TEXT);
+                $dum = DbPublic::Normalize($event->message);
+                $cmd->bindParam(':message', $dum, SQLITE3_TEXT);
                 $br = $cmd->execute();
             } catch (Exception $ex) {
                 HtmlEcho($ex->getMessage());

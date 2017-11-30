@@ -16,7 +16,7 @@ class DbPublic {
     }
 
     /**
-     * FORMS textarea CAB RECEIVE A \r, AS WELL AS \n
+     * FORMS textarea CAN RECEIVE A \r, AS WELL AS \n
      * 
      * @param type $str
      * @return type
@@ -74,18 +74,6 @@ class DbPublic {
         return $this->db->exec($cmd);
     }
 
-    function _append_pages($event) {
-        $cmd = 'SELECT * FROM DBPAGE WHERE QUOTE_ID = ' . $event->eventGUID . ';';
-        $results = $this->db->query($cmd);
-        $event->Quote = $event->Quote . '<hr>Pages:<br/>';
-        if ($results == false) {
-            return;
-        }
-        while ($row = $results->fetchArray()) {
-            $event->Quote = $event->Quote . '&nbsp;&nbsp;&nbsp;---' . $row['Page'] . '<br/>';
-        }
-    }
-
     function read($pkey, $event) {
         HtmlDebug("<hr/>read(" . $pkey . "," . $event->eventGUID . ")<hr/>");
         if (is_a($event, "RowEvent") === false) {
@@ -105,24 +93,6 @@ class DbPublic {
             return true; // LEGACY
         }
         return false; // LEGACY
-    }
-
-    function countTrackedChanges() {
-        $cmd = 'SELECT count(*) FROM DBTRACKER;';
-        $rows = $this->db->query($cmd);
-        if ($row = $rows->fetchArray()) {
-            return $row[0];
-        }
-        return 0;
-    }
-
-    function countPages($page) {
-        $cmd = 'SELECT count(*) FROM DBPAGE WHERE PAGE LIKE("%' . $page . '%");';
-        $rows = $this->db->query($cmd);
-        if ($row = $rows->fetchArray()) {
-            return $row[0];
-        }
-        return 0;
     }
 
     /**
@@ -187,12 +157,6 @@ class DbPublic {
             array_push($result, $row);
         }
         return $result;
-    }
-
-    function readQuote($event) {
-        if ($this->read($event->eventGUID, $event) === false)
-            return false; // LEGACY
-        return $event; // LEGACY
     }
 
 }
