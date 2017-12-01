@@ -10,7 +10,7 @@ class DbUser extends DbPublic {
     }
 
     function append($event) {
-        if (is_a($event, "RowEvent") === false) {
+        if (is_a($event, 'RowEvent') === false) {
             return false;
         }
         $br = false;
@@ -34,7 +34,7 @@ class DbUser extends DbPublic {
     }
 
     function update($event) {
-        if (is_a($event, "RowEvent") === false || $event->eventGUID < 0) {
+        if (is_a($event, 'RowEvent') === false || $event->eventGUID < 0) {
             HtmlDebug("Db Update - TYPE / NUMBER ERROR!");
             return false;
         }
@@ -61,7 +61,7 @@ class DbUser extends DbPublic {
     }
 
     function delete($event) {
-        if (is_a($event, "RowEvent") == false || $event->eventGUID < 0) {
+        if (is_a($event, 'RowEvent') == false || $event->eventGUID < 0) {
             return true; // gigo
         }
         $cmd = "DELETE FROM DBEVENT WHERE guid = '$event->eventGUID';";

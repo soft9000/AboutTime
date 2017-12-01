@@ -10,6 +10,7 @@ class CodeAccount extends AbsFormProcessor {
 
     function doFormRequest() {
         HtmlEcho($this->getFormName());
+        return $this;
     }
 
 }

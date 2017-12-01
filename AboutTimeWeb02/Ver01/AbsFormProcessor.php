@@ -11,9 +11,19 @@ abstract class AbsFormProcessor {
      * Must return a FormProcessor .. even if it is yourself!
      */
     abstract protected function doFormRequest();
+    
+    /**
+     * Returns the PHP file name only - no path, please!
+     * 
+     * @return string
+     */
+    protected function getFormFileName() {
+        $name = $this->getFormName() . ".php";
+        return $name;
+    }
 
     /**
-     * Must return a string / html response - request is always a FormProcessot:
+     * Must return a string / html response - request is always a FormProcessor:
      */  
     protected function getFormResponse($request) {
         $zname = $this->getFormName();
@@ -76,10 +86,6 @@ abstract class AbsFormProcessor {
           HtmlEcho("No Relation");
           return false;
           } */
-
-
-        //         print_r($_REQUEST);
-
 
         $that = $activity;
         if ($activity->hasFormData()) {

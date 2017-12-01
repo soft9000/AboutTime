@@ -5,46 +5,59 @@
 
 body {
     font-size:18px;
-    background-color: lightgreen;
-    color: darkgreen;
-    border: 7px solid yellowgreen;
+    background-color: lightblue;
+    color: darkblue;
+    border: 7px solid blueviolet;
     border-radius: 7px;
 }
 
 #localtime_tick {
     font-size:26px;
-    background-color: lightgreen;
-    color: darkgreen;    
+    background-color: lightblue;
+    color: darkblue;    
 }
 
 .field_lbl {
     font-size:26px;
-    background-color: lightgreen;
+    background-color: lightblue;
     color: black;    
     position: relative;
     top: 0px;
     left: 2px;
 }
 
-.field_txt {
+.field_txt,
+.field_lbl {
     font-size:26px;
     background-color: white;    
 }
 
+.field_ro,
+.field_txt {
+    font-size:26px;
+    background-color: lightgray;
+}
+
+.field_lbl_ro,
+.field_ro {
+    font-size:26px;
+    background-color: lightblue;    
+}
+
 .menu {
     font-size:26px;
-    background-color: lightgreen;
-    color: darkgreen;
+    background-color: lightblue;
+    color: darkblue;
 }
 
 .logo {
     font-size:18px; 
-    background-color: lightgreen;
-    color: darkgreen;
+    background-color: lightblue;
+    color: darkblue;
 }
 
 .boxborder {
-    border: 1px solid yellowgreen;
+    border: 1px solid lightblue;
     border-radius: 7px;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     padding: 10px;
@@ -53,7 +66,7 @@ body {
 .buttonmedium {
     font-size:18px;
     text-align: center; 
-    border: 1px solid yellowgreen;
+    border: 1px solid lightblue;
     background-color: #4CAF50; /* Green */
     color: white;
     width: 150px;
@@ -65,7 +78,7 @@ body {
 .buttonlike {
     font-size:18px;
     text-align: center; 
-    border: 1px solid yellowgreen;
+    border: 1px solid lightblue;
     background-color: gray;
     color: white;
     width: 150px;
@@ -77,15 +90,21 @@ body {
 .notebox {
     font-size:26px;
     background: white;
-    border: 1px solid yellowgreen;
+    border: 1px solid lightblue;
     border-radius: 7px;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     padding: 10px;
 }
 
+
+.notebox_ro,
+.notebox {
+    background: lightgray;
+}
+
 .qnum {
     text-align: center; 
-    border: 0px solid yellowgreen;
+    border: 0px solid lightblue;
     background-color: lightgray;
     color: black;
     width: 320px;
@@ -96,7 +115,7 @@ body {
 .buttonbig {
     font-size:18px;
     text-align: left; 
-    border: 1px solid yellowgreen;
+    border: 1px solid lightblue;
     background-color: #4CAF50; /* Green */
     color: white;
     width: 250px;

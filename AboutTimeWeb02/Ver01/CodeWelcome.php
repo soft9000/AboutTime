@@ -14,15 +14,15 @@ class CodeWelcome extends AbsFormProcessor {
 
     protected function getFormResponse($request) {
         global $VERDIR;
-        $form = $VERDIR . $this->getFormName() . ".php";
+        $form = $VERDIR . $this->getFormFileName();
 
         $style = 'class="buttonbig" ';
         $response = '<center>';
         $response .= '<form action="' . $form . '" id="' . $this->getFormName() . '" method="post">';
         $response .=  '<table>';
-        $response .=  '    <tr><td><input type="submit" name="op" value="1. Account" ' . $style . '> </td></tr>';
-        $response .=  '    <tr><td><input type="submit" name="op" value="2. Add Events" ' . $style . '> </td></tr>';
-        $response .=  '    <tr><td><input type="submit" name="op" value="3. Reporting" ' . $style . '> </td></tr>';
+        $response .=  '    <tr><td><input type="submit" name="op" value="Account" ' . $style . '> </td></tr>';
+        $response .=  '    <tr><td><input type="submit" name="op" value="New Entries" ' . $style . '> </td></tr>';
+        $response .=  '    <tr><td><input type="submit" name="op" value="Old Entries" ' . $style . '> </td></tr>';
         $response .=  '</table>';
         $response .=  '</form>';
         $response .=  '</center>';
@@ -36,18 +36,18 @@ class CodeWelcome extends AbsFormProcessor {
 
             $op = $_REQUEST["op"];
 
-            switch ($op[0]) {
-                case '1':
+            switch ($op) {
+                case 'Account':
                     //HtmlDebug("Account Management<br>");
                     $activity = new CodeAccount();
                     break;
-                case '2':
+                case 'New Entries':
                     //HtmlDebug("Add Event<br>");
                     $activity = new CodeEvent();
                     break;
-                case '3':
+                case 'Old Entries':
                     //HtmlDebug("Reporting<br>");
-                    $activity = new CodeTimesheet();
+                    $activity = new CodeNavEvent();
                     break;
             }
         }

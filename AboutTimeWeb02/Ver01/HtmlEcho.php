@@ -1,11 +1,15 @@
 <?php
 
+function HtmlPrint($message) {
+    return ("<center>" . $message . "</center>");
+}
+
 function HtmlEcho($message) {
-    echo "<center>" . $message . "</center>";
+    print("<center>" . $message . "</center>");
 }
 
 function HtmlDebug($message) {
-    echo '<div class=errorprint>' . $message . '</div>';
+    print('<div class=errorprint>' . $message . '</div>');
 }
 
 ?>

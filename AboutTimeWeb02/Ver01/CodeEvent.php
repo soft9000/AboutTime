@@ -10,6 +10,10 @@ class CodeEvent extends AbsFormProcessor {
     function __construct() {
         $this->event = new RowEvent();
     }
+    
+    function setEvent($doit, $event) {
+        $this->event = $event;
+    }
 
     public function getHeader($css) {
         $result = '<!DOCTYPE html>' .
@@ -53,18 +57,15 @@ class CodeEvent extends AbsFormProcessor {
     }
 
     protected function getFormResponse($request) {
-        global $VERDIR;
-        $form = $this->getFormName() . ".php";
         $zname = $this->getFormName();
         $event = new RowEvent();
 
         $result = $this->getHomeLink();
-        $result .= '<form action="' . $form . '" method="post">';
+        $result .= '<form action="' . $this->getFormFileName() . '" method="post">';
         $result .= '<table>';
         // START MENU BUTTONS
         $result .= "\n <tr><td></td><td>";
         $result .= '<input type="submit" name="' . $zname . '" class="buttonmedium" value="Create">';
-        $guid = $this->event->eventGUID;
         if ($guid != -1) {
             $result .= '    <input type="submit" name="' . $zname . '" class="buttonmedium" value="Update">';
             $result .= '    <input type="submit" name="' . $zname . '" class="buttonmedium" value="Delete">';
@@ -72,17 +73,18 @@ class CodeEvent extends AbsFormProcessor {
         }
         $result .= "<hr></td></tr>\n";
         // STOP MENU BUTTONS
+        $guid = $this->event->eventGUID;
         $result .= '    <tr><td class="field_lbl">Time:</td> <td><input name="ignoretime" id="localtime_tick" class="notebox" value="' . $this->event->localtime . '" readonly></td></tr>';
         $result .= "\n";
         $result .= '    <tr><td class="field_lbl">Stars:</td> <td><input name="stars" class="field_txt" value="' . $this->event->stars . '"></td></tr>';
         $result .= "\n";
         $result .= '    <tr><td class="field_lbl">Subject:</td> <td><input name="subject" class="field_txt" value="' . $this->event->subject . '"></td></tr>';
         $result .= "\n";
-        $result .= '    <tr><td class="field_lbl">Event:</td><td></td></tr>';
+        $result .= '    <tr><td class="field_lbl">Entry:</td><td></td></tr>';
         $result .= "\n";
         $result .= '    <tr><td></td><td><textarea name="event" class="notebox" rows="10" cols="40">' . $this->event->message . '</textarea></td></tr>';
         $result .= "\n";
-        $result .= '    <tr><td></td><td><input name="localtime" id="localtime_epoch" class="notebox" value="' . $this->event->localtime . '" hidden></td>';
+        $result .= '    <tr><td></td><td><input name="localtime" id="localtime_epoch" class="notebox_ro" value="' . $this->event->localtime . '" hidden></td>';
         $result .= "\n";
         $result .= '    <tr><td></td><td><b>Event ID: <input type="text" class="qnum" name="eventGUID" value="' . $guid . '" readonly></b></td></tr>';
         $result .= '</table>';
@@ -160,7 +162,7 @@ class CodeEvent extends AbsFormProcessor {
                 $br = $db->append($this->event);
             }
             if ($br === false) {
-                HtmlEcho("Event Operation Error!");
+                return HtmlPrint("Event Operation Error!");
             } else {
                 ;
             }

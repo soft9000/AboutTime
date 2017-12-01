@@ -4,8 +4,8 @@ include_once 'headers.php';
 
 class RowEvent {
 
-    var $ID = -1; 
-    var $eventGUID = -1; 
+    var $ID = -1;
+    var $eventGUID = -1;
     var $localtime = -1;
     var $stars = 3;
     var $subject = "undefined";
@@ -16,7 +16,7 @@ class RowEvent {
     }
 
     function assign($event) {
-        if (is_a($event, "RowEvent") === false) {
+        if (is_a($event, 'RowEvent') === false) {
             return false;
         }
         $this->subject = $event->subject;
@@ -26,22 +26,19 @@ class RowEvent {
         return true;
     }
 
-    function toArray() {
-        $result = array();
-        $result[0] = $this->subject;
-        $result[1] = $this->message;
-        return $result;
-    }
-
-    function fromArray($array) {
-        if (count($array) != 2) {
+    function assignFromArray($row) {
+        if (isset($row['localtime']) == false) {
             return false;
         }
-        $this->subject = $array[0];
-        $this->message = $array[1];
+        $this->ID = $row['ID'];
+        $this->eventGUID = $row['guid'];
+        $this->localtime = $row['localtime'];
+        $this->stars = $row['stars'];
+        $this->subject = $row['subject'];
+        $this->message = $row['entry'];
         return true;
     }
-}
 
+}
 
 ?>
