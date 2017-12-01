@@ -65,7 +65,6 @@ class DbPublic {
     }
 
     function read($event) {
-        HtmlDebug("<hr/>read(" . $event->ID . "," . $event->eventGUID . ")<hr/>");
         if (is_a($event, 'RowEvent') === false) {
             return false;
         }
@@ -74,11 +73,13 @@ class DbPublic {
             return false;
         }
 
-        $guid = $event->eventGUID;
         $results = false;
-        if ($guid < 1) {
+        $guid = $event->eventGUID;
+        if ($guid === -1) {
+            HtmlDebug("<hr/>read x ID(" . $event->ID . "," . $event->eventGUID . ")<hr/>");
             $results = $this->db->query('SELECT * FROM DBEVENT ORDER BY ID LIMIT 1;');
         } else {
+            HtmlDebug("<hr/>read X GUID(" . $event->ID . "," . $event->eventGUID . ")<hr/>");
             $results = $this->db->query('SELECT * FROM DBEVENT WHERE GUID = "' . $guid . '" LIMIT 1;');
         }
         $row = $results->fetchArray();

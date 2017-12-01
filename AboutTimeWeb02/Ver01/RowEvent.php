@@ -30,6 +30,7 @@ class RowEvent {
         if (isset($row['localtime']) == false) {
             return false;
         }
+        HtmlDebug(print_r($row));
         $this->ID = $row['ID'];
         $this->eventGUID = $row['guid'];
         $this->localtime = $row['localtime'];
