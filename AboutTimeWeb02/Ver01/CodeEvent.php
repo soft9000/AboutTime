@@ -66,6 +66,7 @@ class CodeEvent extends AbsFormProcessor {
         // START MENU BUTTONS
         $result .= "\n <tr><td></td><td>";
         $result .= '<input type="submit" name="' . $zname . '" class="buttonmedium" value="Create">';
+        $guid = $this->event->eventGUID;
         if ($guid != -1) {
             $result .= '    <input type="submit" name="' . $zname . '" class="buttonmedium" value="Update">';
             $result .= '    <input type="submit" name="' . $zname . '" class="buttonmedium" value="Delete">';
@@ -73,7 +74,6 @@ class CodeEvent extends AbsFormProcessor {
         }
         $result .= "<hr></td></tr>\n";
         // STOP MENU BUTTONS
-        $guid = $this->event->eventGUID;
         $result .= '    <tr><td class="field_lbl">Time:</td> <td><input name="ignoretime" id="localtime_tick" class="notebox" value="' . $this->event->localtime . '" readonly></td></tr>';
         $result .= "\n";
         $result .= '    <tr><td class="field_lbl">Stars:</td> <td><input name="stars" class="field_txt" value="' . $this->event->stars . '"></td></tr>';
