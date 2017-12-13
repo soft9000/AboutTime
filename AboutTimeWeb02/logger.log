@@ -5,3 +5,12 @@
 2017/11/29: 06.51.05 (LOCAL)	NOTE: FORMS POSTED TEXTAREA PAYLOADS HAVE BOTH \r and \n 
 2017/11/29: 06.57.02 (LOCAL)	NOTE: Prepared statements use bindParam in PHP for SQLITE3.
 2017/11/29: 11.45.54 (LOCAL)	Event Create, Update, and Delete - by GUID - CodeEvent.php Form - Testing Success.
+2017/11/29: 14.36.45 (LOCAL)	Github: Created Soft9000/AboutTime, genericised and uploaded to same.
+2017/12/01: 10.25.15 (LOCAL)	Added read-only review, with option to pop-over to the editing menu. New page navigation / object re-direction framework works well.
+2017/12/01: 10.26.01 (LOCAL)	Uploaded to github.
+2017/12/01: 14.34.48 (LOCAL)	Uploaded to github.
+2017/12/12: 08.32.04 (LOCAL)	Python API: /usr/bin/python3.5 /d_drive/USR/code/Python3/AboutTime_API/CreateTest.py
+2017/12/12: 08.32.53 (LOCAL)	PHP Server: /d_drive/USR/code/PHP/AboutTimeWeb02
+2017/12/13: 06.56.45 (LOCAL)	Resolved: Keeping with RFC 2822 time.
+2017/12/13: 08.58.43 (LOCAL)	Javascript: Excellent time & date info review - https://www.digitalocean.com/community/tutorials/understanding-date-and-time-in-javascript
+2017/12/13: 12.38.42 (LOCAL)	Resumption between editing & Nav review works great.

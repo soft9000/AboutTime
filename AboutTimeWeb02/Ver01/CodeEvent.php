@@ -6,13 +6,15 @@ class CodeEvent extends AbsFormProcessor {
 
     var $event = NULL;
     var $request = -1;
+    var $nav_resume = 0;
 
     function __construct() {
         $this->event = new RowEvent();
     }
-    
-    function setEvent($doit, $event) {
+
+    function setRedirect($doit, $event) {
         $this->event = $event;
+        $this->nav_resume = 1;
     }
 
     public function getHeader($css) {
@@ -25,7 +27,7 @@ class CodeEvent extends AbsFormProcessor {
                 '<script>
             function startTime() {
                 var today = new Date();
-                document.getElementById("localtime_epoch").value = today;
+                document.getElementById("localtime_epoch").value = today; //today.getTime();
                 var h = today.getHours();
                 var m = today.getMinutes();
                 var s = today.getSeconds();
@@ -57,6 +59,7 @@ class CodeEvent extends AbsFormProcessor {
     }
 
     protected function getFormResponse($request) {
+
         $zname = $this->getFormName();
         $event = new RowEvent();
 
@@ -84,9 +87,12 @@ class CodeEvent extends AbsFormProcessor {
         $result .= "\n";
         $result .= '    <tr><td></td><td><textarea name="event" class="notebox" rows="10" cols="40">' . $this->event->message . '</textarea></td></tr>';
         $result .= "\n";
-        $result .= '    <tr><td></td><td><input name="localtime" id="localtime_epoch" class="notebox_ro" value="' . $this->event->localtime . '" hidden></td>';
-        $result .= "\n";
         $result .= '    <tr><td></td><td><b>Event ID: <input type="text" class="qnum" name="eventGUID" value="' . $guid . '" readonly></b></td></tr>';
+        $result .= "\n";
+        $result .= '    <tr><td></td><td><input name="localtime" id="localtime_epoch" value="' . $this->event->localtime . '" hidden></td>';
+        $result .= "\n";
+        $result .= '    <tr><td></td><td><input name="nav_resume" id="nav_resume" value="' . $this->nav_resume . '" hidden></td>';
+        $result .= "\n";
         $result .= '</table>';
         $result .= '</form>';
         return $result;
@@ -135,6 +141,13 @@ class CodeEvent extends AbsFormProcessor {
         $tmp = $_REQUEST['stars'];
         $this->event->stars = trim($tmp);
 
+        if (isset($_REQUEST['nav_resume']) === false) {
+            HtmlDebug("Error 601 - readFrom_REQUEST");
+            return false;
+        }
+        $tmp = $_REQUEST['nav_resume'];
+        $this->nav_resume = trim($tmp);
+
         HtmlDebug("Success: readFrom_REQUEST - " . $this->event->localtime);
         return true;
     }
@@ -166,6 +179,12 @@ class CodeEvent extends AbsFormProcessor {
             } else {
                 ;
             }
+        }
+        // AFTER EDITING RE-DIRECTION RESUME, if and as required
+        if ($this->nav_resume == 1) {
+            $response = new CodeNavEvent();
+            $response->setRedirect($this, $this->event);
+            return $response;
         }
         return $this;
     }

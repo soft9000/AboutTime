@@ -21,6 +21,12 @@ class CodeNavEvent extends AbsFormProcessor {
     protected function getFormName() {
         return "FormNavEvent";
     }
+    
+    function setRedirect($doit, $event) {
+        $this->event_guid = $event->eventGUID;
+        $this->event_id = $event->ID;
+        $this->admin = true; // TODO: implied?
+    }    
 
     protected function doFormRequest() {
         $result = $this;
@@ -69,7 +75,7 @@ class CodeNavEvent extends AbsFormProcessor {
                 // Re-direct to CodeEvent editor ...
                 $result = new CodeEvent();
                 // $result->doFormRequest();
-                $result->setEvent($this, $event);
+                $result->setRedirect($this, $event);
             }
         }
         return $result;
