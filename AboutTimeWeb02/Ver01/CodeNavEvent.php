@@ -21,12 +21,12 @@ class CodeNavEvent extends AbsFormProcessor {
     protected function getFormName() {
         return "FormNavEvent";
     }
-    
+
     function setRedirect($doit, $event) {
         $this->event_guid = $event->eventGUID;
         $this->event_id = $event->ID;
         $this->admin = true; // TODO: implied?
-    }    
+    }
 
     protected function doFormRequest() {
         $result = $this;
@@ -97,7 +97,6 @@ class CodeNavEvent extends AbsFormProcessor {
             if ($db->read($event) == false) {
                 return HtmlPrint("Unable to read editing event.");
             }
-            // TODO: Need to edit!
         }
         if ($event->isNull()) {
             if ($this->event_guid == -1) {
@@ -109,6 +108,13 @@ class CodeNavEvent extends AbsFormProcessor {
                 if ($db->read($event) == false) {
                     return HtmlPrint("Unable to read event " . $event->eventGUID . ".");
                 }
+            }
+        }
+        if ($event->ID === -1 || $event->eventGUID === -1) {
+            $event->ID = $this->event_id;
+            $event->eventGUID = $this->event_guid;
+            if ($db->read($event) == false) {
+                return HtmlPrint("Unable to locate an event?");
             }
         }
         return $this->getEventView($event);
@@ -142,7 +148,7 @@ class CodeNavEvent extends AbsFormProcessor {
     }
 
     function getFormNav($event) {
-        $result = '';
+        $result = $this->getHomeLink();
         $form = $this->getFormFileName();
         $name = $this->getFormName();
         if ($this->isDebug()) {
@@ -185,9 +191,8 @@ class CodeNavEvent extends AbsFormProcessor {
             return HtmlPrint("Form TYPE ERROR!");
         }
         if ($event->ID === -1 || $event->eventGUID === -1) {
-            return HtmlPrint("Error: " . print_r($event));
+            return HtmlPrint("zError: " . print_r($event));
         }
-
         $result = $this->getFormNav($event);
         $result .= CodeNavEvent::GetEventDisplay($event);
         return $result;

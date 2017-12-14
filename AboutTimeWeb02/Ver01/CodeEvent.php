@@ -18,13 +18,14 @@ class CodeEvent extends AbsFormProcessor {
     }
 
     public function getHeader($css) {
-        $result = '<!DOCTYPE html>' .
-                '<html>' .
+        $result = "<!DOCTYPE html>\n" .
+                "<html>\n" .
                 '    <head>' .
                 '       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">' .
                 '       <title>AboutTime - Web Edition</title>' .
-                '       <link rel="stylesheet" type="text/css" href="' . $css . '">' .
-                '<script>
+                '       <link rel="stylesheet" type="text/css" href="' . $css . '">';
+        if ($this->nav_resume == 0) {
+            $result .= '<script>
             function startTime() {
                 var today = new Date();
                 document.getElementById("localtime_epoch").value = today; //today.getTime();
@@ -49,8 +50,11 @@ class CodeEvent extends AbsFormProcessor {
                 return sign + hours + ":" + minutes;
             }
         </script>' .
-                '   </head>' .
-                '<body onload="startTime()">';
+                    '   </head>' .
+                    '<body onload="startTime()">';
+        } else {
+            $result .= "\n</head>\n<body>\n";
+        }
         return $result;
     }
 

@@ -22,7 +22,6 @@ class RowEvent {
         $this->subject = $event->subject;
         $this->event = $event->event;
         $this->eventGUID = $event->eventGUID;
-        HtmlDebug("ASSIGN " . $this->subject . " " . $event->event . "!!!");
         return true;
     }
 
@@ -30,7 +29,6 @@ class RowEvent {
         if (isset($row['localtime']) == false) {
             return false;
         }
-        HtmlDebug(print_r($row));
         $this->ID = $row['ID'];
         $this->eventGUID = $row['guid'];
         $this->localtime = $row['localtime'];
