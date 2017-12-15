@@ -15,3 +15,6 @@
 2017/12/13: 08.58.43 (LOCAL)	Javascript: Excellent time & date info review - https://www.digitalocean.com/community/tutorials/understanding-date-and-time-in-javascript
 2017/12/13: 12.38.42 (LOCAL)	Resumption between editing & Nav review works great.
 2017/12/14: 05.20.42 (LOCAL)	Fixed 'nav session resumption errors after U/C (D was okay.) Uploaded to GitHub.
+2017/12/15: 06.07.05 (LOCAL)	Epoch Time Support: Wired-in same. Database schema updated. Creation clock display updated.
+2017/12/15: 06.07.22 (LOCAL)	Uploaded to GitHub.
+2017/12/15: 06.17.13 (LOCAL)	The WUI is minimalist: Posted event dates remain immutable. Good enough to re-use for an AboutTime back-end / Python API.

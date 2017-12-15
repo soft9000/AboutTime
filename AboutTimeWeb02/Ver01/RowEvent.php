@@ -20,9 +20,13 @@ class RowEvent {
         if (is_a($event, 'RowEvent') === false) {
             return false;
         }
-        $this->subject = $event->subject;
-        $this->event = $event->event;
+        $this->ID = $event->ID;
         $this->eventGUID = $event->eventGUID;
+        $this->localtime = $event->localtime;
+        $this->epochtime = $event->epochtime;
+        $this->stars = $event->stars;
+        $this->subject = $event->subject;
+        $this->message = $event->message;
         return true;
     }
 
