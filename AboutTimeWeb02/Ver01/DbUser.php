@@ -17,10 +17,11 @@ class DbUser extends DbPublic {
         $event->eventGUID = DbPublic::MkGUID();
         $this->db->enableExceptions(true);
         try {
-            $cmd = $this->db->prepare('INSERT INTO DBEVENT (ID, guid, localtime, stars, subject, entry) '
-                    . 'VALUES (NULL, :guid, :localtime, :stars, :subject, :message);');
+            $cmd = $this->db->prepare('INSERT INTO DBEVENT (ID, guid, localtime, epochtime, stars, subject, entry) '
+                    . 'VALUES (NULL, :guid, :localtime, :epochtime, :stars, :subject, :message);');
             $cmd->bindParam(':guid', $event->eventGUID, SQLITE3_TEXT);
             $cmd->bindParam(':localtime', $event->localtime, SQLITE3_TEXT);
+            $cmd->bindParam(':epochtime', $event->epochtime, SQLITE3_INTEGER);
             $cmd->bindParam(':stars', $event->stars, SQLITE3_INTEGER);
             $cmd->bindParam(':subject', $event->subject, SQLITE3_TEXT);
             $dum = DbPublic::Normalize($event->message);

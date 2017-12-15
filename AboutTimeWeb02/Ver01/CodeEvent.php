@@ -28,14 +28,20 @@ class CodeEvent extends AbsFormProcessor {
             $result .= '<script>
             function startTime() {
                 var today = new Date();
-                document.getElementById("localtime_epoch").value = today; //today.getTime();
+                var y = today.getFullYear();
+                var mo = today.getMonth();
+                var d = today.getDate();
                 var h = today.getHours();
                 var m = today.getMinutes();
                 var s = today.getSeconds();
+                document.getElementById("localtime_epoch").value = Date.UTC(y, mo, d, h, m, s);
+                mo = pad(mo + 1);
+                d = pad(d);
                 h = pad(h);
                 m = pad(m);
                 s = pad(s);
                 document.getElementById("localtime_tick").value =
+                y + "/" + mo + "/" + d + ": " +
                 h + ":" + m + ":" + s + " (" + createOffset(today) + " UTC)";
                 var t = setTimeout(startTime, 500);
             }
@@ -81,7 +87,7 @@ class CodeEvent extends AbsFormProcessor {
         }
         $result .= "<hr></td></tr>\n";
         // STOP MENU BUTTONS
-        $result .= '    <tr><td class="field_lbl">Time:</td> <td><input name="ignoretime" id="localtime_tick" class="notebox" value="' . $this->event->localtime . '" readonly></td></tr>';
+        $result .= '    <tr><td class="field_lbl">Time:</td> <td><input name="localtime_tick" id="localtime_tick" class="notebox" value="' . $this->event->localtime . '" readonly></td></tr>';
         $result .= "\n";
         $result .= '    <tr><td class="field_lbl">Stars:</td> <td><input name="stars" class="field_txt" value="' . $this->event->stars . '"></td></tr>';
         $result .= "\n";
@@ -93,7 +99,7 @@ class CodeEvent extends AbsFormProcessor {
         $result .= "\n";
         $result .= '    <tr><td></td><td><b>Event ID: <input type="text" class="qnum" name="eventGUID" value="' . $guid . '" readonly></b></td></tr>';
         $result .= "\n";
-        $result .= '    <tr><td></td><td><input name="localtime" id="localtime_epoch" value="' . $this->event->localtime . '" hidden></td>';
+        $result .= '    <tr><td></td><td><input name="localtime_epoch" id="localtime_epoch" value="' . $this->event->epochtime . '" hidden></td>';
         $result .= "\n";
         $result .= '    <tr><td></td><td><input name="nav_resume" id="nav_resume" value="' . $this->nav_resume . '" hidden></td>';
         $result .= "\n";
@@ -131,13 +137,20 @@ class CodeEvent extends AbsFormProcessor {
         $tmp = $_REQUEST['event'];
         $this->event->message = $tmp;
 
-        if (isset($_REQUEST['localtime']) === false) {
+        if (isset($_REQUEST['localtime_tick']) === false) {
             HtmlDebug("Error 401 - readFrom_REQUEST");
             return false;
         }
-        $tmp = $_REQUEST['localtime'];
+        $tmp = $_REQUEST['localtime_tick'];
         $this->event->localtime = trim($tmp);
 
+        if (isset($_REQUEST['localtime_epoch']) === false) {
+            HtmlDebug("Error 402 - readFrom_REQUEST");
+            return false;
+        }
+        $tmp = $_REQUEST['localtime_epoch'];
+        $this->event->epochtime = trim($tmp);
+        
         if (isset($_REQUEST['stars']) === false) {
             HtmlDebug("Error 501 - readFrom_REQUEST");
             return false;

@@ -7,6 +7,7 @@ class RowEvent {
     var $ID = -1;
     var $eventGUID = -1;
     var $localtime = -1;
+    var $epochtime = -1;
     var $stars = 3;
     var $subject = "undefined";
     var $message = "undefined";
@@ -32,6 +33,7 @@ class RowEvent {
         $this->ID = $row['ID'];
         $this->eventGUID = $row['guid'];
         $this->localtime = $row['localtime'];
+        $this->epochtime = $row['epochtime'];
         $this->stars = $row['stars'];
         $this->subject = $row['subject'];
         $this->message = $row['entry'];

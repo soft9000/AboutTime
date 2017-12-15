@@ -209,12 +209,12 @@ class CodeNavEvent extends AbsFormProcessor {
         }
         $result = '';
         $result .= '<table>';
-        $result .= "<tr><td class='field_lbl_ro'>Entry Weight: </td><td><input name='subject' class='field_ro' value='$entry->stars'></td></tr>\n";
-        $result .= "<tr><td class='field_lbl_ro'>Entry Date: </td><td><input name='subject' class='field_ro' value='$entry->localtime'></td></tr>\n";
+        $result .= "<tr><td class='field_lbl_ro'>Entry Weight: </td><td><input name='stars' class='field_ro' value='$entry->stars' readonly></td></tr>\n";
+        $result .= "<tr><td class='field_lbl_ro'>Entry Date: </td><td><input name='localtime' class='field_ro' value='$entry->localtime' readonly></td></tr>\n";
 
-        $result .= "<tr><td class='field_lbl_ro'>Subject: </td><td><input name='subject' class='field_ro' value='$entry->subject'></td></tr>\n";
+        $result .= "<tr><td class='field_lbl_ro'>Subject: </td><td><input name='subject' class='field_ro' value='$entry->subject' readonly></td></tr>\n";
         $result .= "<tr><td class='field_lbl_ro'>Entry: </td><td></td></tr>\n";
-        $result .= "<tr><td></td><td><textarea name='event' class='notebox' rows='10' cols='40' readonly>$entry->message</textarea></td></tr>\n";
+        $result .= "<tr><td></td><td><textarea name='message' class='notebox' rows='10' cols='40' readonly>$entry->message</textarea></td></tr>\n";
         $result .= "<tr><td></td><td></td></tr>\n";
         $result .= '</table>';
         return $result;
