@@ -4,13 +4,11 @@ include_once 'headers.php';
 
 class CodeNavEvent extends AbsFormProcessor {
 
-    var $direction = 0; // -1 back, = 0 refresh, 1 = forward
     var $event_guid = -1;     // unique 
     var $event_id = -1;       // primary key
-    var $admin = "0";   // logical admin flag
-    var $logical = 1;   // logical quote number
+    var $admin = "0";   // admin flag
     var $filter = "undefined";
-    var $movement = '';
+    var $op = '';
     var $debug = false;
 
     function __construct() {
@@ -36,19 +34,14 @@ class CodeNavEvent extends AbsFormProcessor {
             $tmp = $_REQUEST[$name];
             HtmlDebug("NAV GBU = [" . $tmp . "]");
             $this->filter = trim($tmp);
-            if (isset($_REQUEST["logical"]) == true) {
-                $tmp = $_REQUEST["logical"];
-                HtmlDebug("NAV LOGICAL = " . $tmp);
-                $this->logical = $tmp;
-            }
             if (isset($_REQUEST["admin"]) == true) {
                 $tmp = $_REQUEST["admin"];
                 HtmlDebug("NAV ADMIN = " . $tmp);
                 $this->admin = $tmp;
             }
-            if (isset($_REQUEST["movement"]) == true) {
-                $this->movement = $_REQUEST["movement"];
-                HtmlDebug("NAV MOVEMENT = " . $this->movement);
+            if (isset($_REQUEST["op"]) == true) {
+                $this->op = $_REQUEST["op"];
+                HtmlDebug("NAV OP = " . $this->op);
             }
             if (isset($_REQUEST["guid"]) == true) {
                 $tmp = $_REQUEST["guid"];
@@ -63,14 +56,14 @@ class CodeNavEvent extends AbsFormProcessor {
         } else {
             HtmlDebug("NO NAV!");
         }
-        if ($this->movement == "EDIT") {
+        if ($this->op == "EDIT") {
             $ip = new IpTracker();
             $db = Database::OpenDatabase($ip);
             $event = new RowEvent();
             $event->ID = $this->event_id;
             $event->eventGUID = $this->event_guid;
             if ($db->read($event) == false) {
-                $this->movement = "NEXT"; // Just ignore it?
+                $this->op = "NEXT"; // Just ignore it?
             } else {
                 // Re-direct to CodeEvent editor ...
                 $result = new CodeEvent();
@@ -87,17 +80,28 @@ class CodeNavEvent extends AbsFormProcessor {
         $event = new RowEvent();
         $event->ID = $this->event_id;
         $event->eventGUID = $this->event_guid;
-        if ($this->movement == "NEXT") {
-            if ($db->readNext($event) == false) {
-                return HtmlPrint("No more events.");
+        if ($db->read($event) == true) {
+            switch ($this->op) {
+                case "NEXT":
+                    if ($db->readNext($event) == false) {
+                        return HtmlPrint("No more events.");
+                    }
+                    break;
+                case "PREV":
+                    if ($db->readPrev($event) == false) {
+                        return HtmlPrint("No more events.");
+                    }
+                    break;
+                case "EDIT":
+                    if ($db->read($event) == false) {
+                        return HtmlPrint("Unable to read editing event.");
+                    }
+                    break;
+                default:
+                    break;
             }
         }
-        if ($this->movement == "EDIT") {
-            // TODO: Need to move a FORMS REDIRECTION into the doFormRequest()!
-            if ($db->read($event) == false) {
-                return HtmlPrint("Unable to read editing event.");
-            }
-        }
+
         if ($event->isNull()) {
             if ($this->event_guid == -1) {
                 if ($db->read($event) == false) {
@@ -133,20 +137,6 @@ class CodeNavEvent extends AbsFormProcessor {
         return ($this->admin == $ZADMIN);
     }
 
-    function procNav() {
-        switch ($this->direction === 1) {
-            case 1:
-                $this->logical += 1;
-                return;
-            case -1:
-                $this->logical -= 1;
-                return;
-            case 0:
-            default:
-                return;
-        }
-    }
-
     function getFormNav($event) {
         $result = $this->getHomeLink();
         $form = $this->getFormFileName();
@@ -157,21 +147,21 @@ class CodeNavEvent extends AbsFormProcessor {
         $result .= '<div style="color:0xffffff;">';
         $result .= '<form action = "' . $form . '" id = "formnav" method = "post">';
         $result .= '<input hidden name = "' . $name . '" form = "formnav" >';
-        $result .= "&nbsp;&nbsp;";
-        $result .= '<input type = "submit" class="buttonmedium" name = "movement" value = "NEXT">';
-        $result .= "&nbsp;&nbsp;";
-        $result .= '<input type = "submit" class="buttonmedium" name = "movement" value = "EDIT">';
-        $result .= "&nbsp;&nbsp;";
+        $result .= "\n&nbsp;&nbsp;";
+        $result .= '<input type = "submit" class="buttonmedium" name = "op" value = "PREV">';
+        $result .= "\n&nbsp;&nbsp;";
+        $result .= '<input type = "submit" class="buttonmedium" name = "op" value = "NEXT">';
+        $result .= "\n&nbsp;&nbsp;";
+        $result .= '<input type = "submit" class="buttonmedium" name = "op" value = "EDIT">';
+        $result .= "\n&nbsp;&nbsp;";
         if ($this->isDebug()) {
             $result .= "\n";
         }
         if ($this->isAdmin() == false) {
-            $result .= '<input class="buttonlike" name = "admin" value = "' . $this->admin . '">';
+            // $result .= '<input class="buttonlike" name = "admin" value = "' . $this->admin . '">';
         } else {
             $result .= '<input type = "hidden" name = "admin" value = "' . $this->admin . '">';
         }
-        // TODO: echo '<input type = "submit" name = "movement" value = "PREV">';
-        $result .= '<input type = "hidden" name = "logical" value = "' . $this->logical . '">';
         $result .= '<input type = "hidden" name = "guid" value = "' . $event->eventGUID . '">';
         $result .= '<input type = "hidden" name = "dbid" value = "' . $event->ID . '">';
         $result .= '</form>';
@@ -208,15 +198,15 @@ class CodeNavEvent extends AbsFormProcessor {
             return HtmPrint("GetEventDisplay: TYPE ERROR!");
         }
         $result = '';
-        $result .= '<table>';
-        $result .= "<tr><td class='field_lbl_ro'>Entry Weight: </td><td><input name='stars' class='field_ro' value='$entry->stars' readonly></td></tr>\n";
-        $result .= "<tr><td class='field_lbl_ro'>Entry Date: </td><td><input name='localtime' class='field_ro' value='$entry->localtime' readonly></td></tr>\n";
+        $result .= "\n<table>";
+        $result .= "\n<tr><td class='field_lbl_ro'>Entry Weight: </td><td><input name='stars' class='field_ro' value='$entry->stars' readonly></td></tr>\n";
+        $result .= "\n<tr><td class='field_lbl_ro'>Entry Date: </td><td><input name='localtime' class='field_ro' value='$entry->localtime' readonly></td></tr>\n";
 
-        $result .= "<tr><td class='field_lbl_ro'>Subject: </td><td><input name='subject' class='field_ro' value='$entry->subject' readonly></td></tr>\n";
-        $result .= "<tr><td class='field_lbl_ro'>Entry: </td><td></td></tr>\n";
-        $result .= "<tr><td></td><td><textarea name='message' class='notebox' rows='10' cols='40' readonly>$entry->message</textarea></td></tr>\n";
-        $result .= "<tr><td></td><td></td></tr>\n";
-        $result .= '</table>';
+        $result .= "\n<tr><td class='field_lbl_ro'>Subject: </td><td><input name='subject' class='field_ro' value='$entry->subject' readonly></td></tr>\n";
+        $result .= "\n<tr><td class='field_lbl_ro'>Entry: </td><td></td></tr>\n";
+        $result .= "\n<tr><td></td><td><textarea name='message' class='notebox' rows='10' cols='40' readonly>$entry->message</textarea></td></tr>\n";
+        $result .= "\n<tr><td></td><td></td></tr>\n";
+        $result .= "\n</table>\n";
         return $result;
     }
 

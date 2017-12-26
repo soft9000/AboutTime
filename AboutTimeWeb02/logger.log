@@ -18,3 +18,6 @@
 2017/12/15: 06.07.05 (LOCAL)	Epoch Time Support: Wired-in same. Database schema updated. Creation clock display updated.
 2017/12/15: 06.07.22 (LOCAL)	Uploaded to GitHub.
 2017/12/15: 06.17.13 (LOCAL)	The WUI is minimalist: Posted event dates remain immutable. Good enough to re-use for an AboutTime back-end / Python API.
+2017/12/15: 07.42.53 (LOCAL)	Minor fixup - uploaded to GitHub.
+2017/12/15: 10.28.13 (LOCAL)	Added abstraction, scaffolding, and PHP Factory for an HTML Forms-Based API.
+2017/12/15: 16.05.05 (LOCAL)	Next / Previous operation working fine, as based upon epochtime.

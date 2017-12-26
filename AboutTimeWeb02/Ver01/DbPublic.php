@@ -91,7 +91,7 @@ class DbPublic {
         return false;
     }
 
-    function readNext($event) {
+    private function _readNext($event, $op) {
         if (is_a($event, 'RowEvent') === false) {
             return false;
         }
@@ -100,12 +100,11 @@ class DbPublic {
             return false;
         }
 
-        $row = $event->ID;
         $results = false;
-        if ($row < 1) {
-            return $this->read($event);
+        if ($event->ID < 1) {
+            return $this->read(-1);
         } else {
-            $results = $this->db->query('SELECT * FROM DBEVENT WHERE ID > ' . $row . ' LIMIT 1;');
+            $results = $this->db->query($op);
         }
         $row = $results->fetchArray();
         if ($row != false) {
@@ -114,6 +113,14 @@ class DbPublic {
             return $br;
         }
         return false;
+    }
+
+    function readNext($event) {
+        return $this->_readNext($event, "SELECT * FROM DBEVENT WHERE epochtime > $event->epochtime ORDER BY epochtime ASC LIMIT 1;");
+    }
+
+    function readPrev($event) {
+        return $this->_readNext($event, "SELECT * FROM DBEVENT WHERE epochtime < $event->epochtime ORDER BY epochtime DESC LIMIT 1;");
     }
 
 }

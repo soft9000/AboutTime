@@ -9,7 +9,7 @@ function HtmlEcho($message) {
 }
 
 function HtmlDebug($message) {
-    // print('<div class=errorprint>' . $message . '</div>');
+    print('<div class=errorprint>' . $message . '</div>');
 }
 
 ?>

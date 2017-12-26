@@ -87,13 +87,13 @@ class CodeEvent extends AbsFormProcessor {
         }
         $result .= "<hr></td></tr>\n";
         // STOP MENU BUTTONS
-        $result .= '    <tr><td class="field_lbl">Time:</td> <td><input name="localtime_tick" id="localtime_tick" class="notebox" value="' . $this->event->localtime . '" readonly></td></tr>';
+        $result .= '    <tr><td class="field_lbl_ro">Time:</td> <td><input name="localtime_tick" id="localtime_tick" class="notebox" value="' . $this->event->localtime . '" readonly></td></tr>';
         $result .= "\n";
-        $result .= '    <tr><td class="field_lbl">Stars:</td> <td><input name="stars" class="field_txt" value="' . $this->event->stars . '"></td></tr>';
+        $result .= '    <tr><td class="field_lbl_ro">Stars:</td> <td><input name="stars" class="field_txt" value="' . $this->event->stars . '"></td></tr>';
         $result .= "\n";
-        $result .= '    <tr><td class="field_lbl">Subject:</td> <td><input name="subject" class="field_txt" value="' . $this->event->subject . '"></td></tr>';
+        $result .= '    <tr><td class="field_lbl_ro">Subject:</td> <td><input name="subject" class="field_txt" value="' . $this->event->subject . '"></td></tr>';
         $result .= "\n";
-        $result .= '    <tr><td class="field_lbl">Entry:</td><td></td></tr>';
+        $result .= '    <tr><td class="field_lbl_ro">Entry:</td><td></td></tr>';
         $result .= "\n";
         $result .= '    <tr><td></td><td><textarea name="event" class="notebox" rows="10" cols="40">' . $this->event->message . '</textarea></td></tr>';
         $result .= "\n";
