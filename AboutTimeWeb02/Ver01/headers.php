@@ -20,6 +20,7 @@ include_once 'Database.php';
 include_once 'DbPublic.php';
 include_once 'DbUser.php';
 include_once 'RowEvent.php';
+include_once 'RowAccount.php';
 
 // include_once 'UtilEditDateTime.php';
 

@@ -36,7 +36,7 @@ class CodeTimesheet extends AbsFormProcessor {
      * @return boolean False on error / none found, else an array of rows found.
      */
     private function readNextNavSet($db) {
-        $total = $db->countEvents();
+        $total = $db->countAccounts();
         if ($total < 1) {
             return false;
         }

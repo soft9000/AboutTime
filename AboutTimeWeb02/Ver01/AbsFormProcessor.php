@@ -11,7 +11,7 @@ abstract class AbsFormProcessor {
      * Must return a FormProcessor .. even if it is yourself!
      */
     abstract protected function doFormRequest();
-    
+
     /**
      * Returns the PHP file name only - no path, please!
      * 
@@ -24,12 +24,11 @@ abstract class AbsFormProcessor {
 
     /**
      * Must return a string / html response - request is always a FormProcessor:
-     */  
+     */
     protected function getFormResponse($request) {
         $zname = $this->getFormName();
         return "<center><font color='red'>$zname</font></center>";
     }
-
 
     /**
      * Check to see if a browser request has a DoProcessor!
@@ -39,17 +38,30 @@ abstract class AbsFormProcessor {
         return isset($_REQUEST[$this->getFormName()]);
     }
 
+    /**
+     * Check to see if a FORM has a NAMED ELEMENT.
+     * 
+     * @param type $elementName
+     * @return boolean
+     */
+    public function getForm($elementName) {
+        if (isset($_REQUEST[$elementName]) === false) {
+            return false;
+        }
+        return $_REQUEST[$elementName];
+    }
+
     public function getHomeLink() {
         global $WEBROOT;
         $result = "\n";
         $result .= '<table class="logo"><tr><td>';
-        $result .=  "\n";
-        $result .=  '<img src="http://www.TheQuoteForToday.com/TheQuoteForToday.gif">';
-        $result .=  '</td><td class="menu">';
-        $result .=  '<a href="' . $WEBROOT . '">[Home]</a>';
-        $result .=  "\n";
-        $result .=  '</td></tr></table>';
-        $result .=  "\n";
+        $result .= "\n";
+        $result .= '<img src="http://www.TheQuoteForToday.com/TheQuoteForToday.gif">';
+        $result .= '</td><td class="menu">';
+        $result .= '<a href="' . $WEBROOT . '">[Home]</a>';
+        $result .= "\n";
+        $result .= '</td></tr></table>';
+        $result .= "\n";
         return $result;
     }
 
@@ -89,8 +101,13 @@ abstract class AbsFormProcessor {
 
         $that = $activity;
         if ($activity->hasFormData()) {
-            $activity = $activity->doFormRequest();
+            $tmp = $activity->doFormRequest();
+
+            if ($tmp != false) {
+                $activity = $tmp;
+            }
         }
+
 
         echo $activity->getHeader($css);
         echo $activity->getFormResponse($that);

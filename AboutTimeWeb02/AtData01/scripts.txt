@@ -12,6 +12,11 @@ entry text
 create table DBUSER (
 ID integer primary key autoincrement,
 email string,
-password text
+password text,
+weekStart integer,
+dayWindow integer,
+payload text
 );
+
+
 

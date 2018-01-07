@@ -109,60 +109,60 @@ class CodeEvent extends AbsFormProcessor {
     }
 
     protected function readFrom_REQUEST() {
-        if (isset($_REQUEST[$this->getFormName()]) === false) {
+        $tmp = $this->getForm($this->getFormName());
+        if ($tmp === false) {
             HtmlDebug("Error 001 - readFrom_REQUEST");
             return false;
         }
-        $tmp = $_REQUEST[$this->getFormName()];
         $this->request = trim($tmp);
 
-        if (isset($_REQUEST['eventGUID']) === false) {
-            HtmlDebug("Error 101 - readFrom_REQUEST");
+        $tmp = $this->getForm('eventGUID');
+        if ($tmp === false) {
+            HtmlDebug("Error 010 - readFrom_REQUEST");
             return false;
         }
-        $tmp = $_REQUEST['eventGUID'];
         $this->event->eventGUID = trim($tmp);
 
-        if (isset($_REQUEST['subject']) === false) {
-            HtmlDebug("Error 201 - readFrom_REQUEST");
+        $tmp = $this->getForm('subject');
+        if ($tmp === false) {
+            HtmlDebug("Error 020 - readFrom_REQUEST");
             return false;
         }
-        $tmp = $_REQUEST['subject'];
         $this->event->subject = trim($tmp);
 
-        if (isset($_REQUEST['event']) === false) {
-            HtmlDebug("Error 301 - readFrom_REQUEST");
+        $tmp = $this->getForm('event');
+        if ($tmp === false) {
+            HtmlDebug("Error 030 - readFrom_REQUEST");
             return false;
         }
-        $tmp = $_REQUEST['event'];
         $this->event->message = $tmp;
 
-        if (isset($_REQUEST['localtime_tick']) === false) {
-            HtmlDebug("Error 401 - readFrom_REQUEST");
+        $tmp = $this->getForm('localtime_tick');
+        if ($tmp === false) {
+            HtmlDebug("Error 040 - readFrom_REQUEST");
             return false;
         }
-        $tmp = $_REQUEST['localtime_tick'];
         $this->event->localtime = trim($tmp);
 
-        if (isset($_REQUEST['localtime_epoch']) === false) {
-            HtmlDebug("Error 402 - readFrom_REQUEST");
+        $tmp = $this->getForm('localtime_epoch');
+        if ($tmp === false) {
+            HtmlDebug("Error 050 - readFrom_REQUEST");
             return false;
         }
-        $tmp = $_REQUEST['localtime_epoch'];
         $this->event->epochtime = trim($tmp);
         
-        if (isset($_REQUEST['stars']) === false) {
-            HtmlDebug("Error 501 - readFrom_REQUEST");
+        $tmp = $this->getForm('stars');
+        if ($tmp === false) {
+            HtmlDebug("Error 060 - readFrom_REQUEST");
             return false;
         }
-        $tmp = $_REQUEST['stars'];
         $this->event->stars = trim($tmp);
 
-        if (isset($_REQUEST['nav_resume']) === false) {
-            HtmlDebug("Error 601 - readFrom_REQUEST");
+        $tmp = $this->getForm('nav_resume');
+        if ($tmp === false) {
+            HtmlDebug("Error 070 - readFrom_REQUEST");
             return false;
         }
-        $tmp = $_REQUEST['nav_resume'];
         $this->nav_resume = trim($tmp);
 
         HtmlDebug("Success: readFrom_REQUEST - " . $this->event->localtime);
