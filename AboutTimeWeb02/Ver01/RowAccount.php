@@ -9,6 +9,8 @@ class RowAccount {
     var $password = 'never';
     var $weekStart = 2; // Monday
     var $dayWindow = 7;
+    var $payload = '';
+    var $pageSize = RequestAccount::SZPAGE_DEFAULT;
 
     function isNull() {
         return ($this->ID === -1);
@@ -23,6 +25,8 @@ class RowAccount {
         $this->password = $event->password;
         $this->weekStart = $event->weekStart;
         $this->dayWindow = $event->dayWindow;
+        $this->pageSize = $event->pageSize;
+        $this->payload = $event->payload;
         return true;
     }
 
@@ -35,6 +39,8 @@ class RowAccount {
         $this->password = $row['password'];
         $this->weekStart = $row['weekStart'];
         $this->dayWindow = $row['dayWindow'];
+        $this->pageSize = $row['pageSize'];
+        $this->payload = $row['payload'];
         return true;
     }
 

@@ -6,6 +6,7 @@ class RowEvent {
 
     var $ID = -1;
     var $eventGUID = -1;
+    var $uid = 1; // default user id
     var $localtime = -1;
     var $epochtime = -1;
     var $stars = 3;
@@ -22,6 +23,7 @@ class RowEvent {
         }
         $this->ID = $event->ID;
         $this->eventGUID = $event->eventGUID;
+        $this->uid = $event->uid;
         $this->localtime = $event->localtime;
         $this->epochtime = $event->epochtime;
         $this->stars = $event->stars;
@@ -36,6 +38,7 @@ class RowEvent {
         }
         $this->ID = $row['ID'];
         $this->eventGUID = $row['guid'];
+        $this->uid = $row['uid'];
         $this->localtime = $row['localtime'];
         $this->epochtime = $row['epochtime'];
         $this->stars = $row['stars'];

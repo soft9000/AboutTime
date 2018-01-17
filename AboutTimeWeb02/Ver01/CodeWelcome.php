@@ -19,13 +19,14 @@ class CodeWelcome extends AbsFormProcessor {
         $style = 'class="buttonbig" ';
         $response = '<center>';
         $response .= '<form action="' . $form . '" id="' . $this->getFormName() . '" method="post">';
-        $response .=  '<table>';
-        $response .=  '    <tr><td><input type="submit" name="op" value="Account" ' . $style . '> </td></tr>';
-        $response .=  '    <tr><td><input type="submit" name="op" value="New Entries" ' . $style . '> </td></tr>';
-        $response .=  '    <tr><td><input type="submit" name="op" value="Old Entries" ' . $style . '> </td></tr>';
-        $response .=  '</table>';
-        $response .=  '</form>';
-        $response .=  '</center>';
+        $response .= '<table>';
+        $response .= '    <tr><td><input type="submit" name="op" value="Account" ' . $style . '> </td></tr>';
+        $response .= '    <tr><td><input type="submit" name="op" value="New Entries" ' . $style . '> </td></tr>';
+        $response .= '    <tr><td><input type="submit" name="op" value="Old Entries" ' . $style . '> </td></tr>';
+        $response .= '    <tr><td><input type="submit" name="op" value="List Entries" ' . $style . '> </td></tr>';
+        $response .= '</table>';
+        $response .= '</form>';
+        $response .= '</center>';
         return $response;
     }
 
@@ -48,6 +49,10 @@ class CodeWelcome extends AbsFormProcessor {
                 case 'Old Entries':
                     //HtmlDebug("Reporting<br>");
                     $activity = new CodeNavEvent();
+                    break;
+                case 'List Entries':
+                    //HtmlDebug("Reporting<br>");
+                    $activity = new CodeEventList();
                     break;
             }
         }

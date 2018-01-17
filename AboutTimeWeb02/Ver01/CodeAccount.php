@@ -59,6 +59,13 @@ class CodeAccount extends AbsFormProcessor {
         }
         $this->account->dayWindow = trim($tmp);
 
+        $tmp = $this->getForm('pageSize');
+        if ($tmp === false) {
+            HtmlDebug("Error 060 - readFrom_REQUEST");
+            return false;
+        }
+        $this->account->pageSize = trim($tmp);
+        
         HtmlDebug("Success: readFrom_REQUEST - " . $this->getFormName());
         return true;
     }
@@ -111,7 +118,9 @@ class CodeAccount extends AbsFormProcessor {
         $result .= "\n";
         $result .= '    <tr><td class="field_lbl_ro">AT Password:</td> <td><input name="accountPass" class="field_ro" value="' . $this->account->password . '" readonly></td></tr>';
         $result .= "\n";
-        $result .= '    <tr><td class="field_lbl_ro">Review Window:</td> <td><input name="dayReviewWindow" class="field_txt" value="' . $this->account->dayWindow . '"></td></tr>';
+        $result .= '    <tr><td class="field_lbl_ro">Day View:</td> <td><input name="dayReviewWindow" type="number" min="7" max = "31" class="field_txt" value="' . $this->account->dayWindow . '"></td></tr>';
+        $result .= "\n";
+        $result .= '    <tr><td class="field_lbl_ro">Page Size:</td> <td><input name="pageSize"  type="number" min="5" max="100" class="field_txt" value="' . $this->account->pageSize . '"></td></tr>';
         $result .= "\n";
 
         // WEEK-START SELECTION

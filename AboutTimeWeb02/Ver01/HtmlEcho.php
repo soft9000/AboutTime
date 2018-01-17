@@ -8,8 +8,12 @@ function HtmlEcho($message) {
     print("<center>" . $message . "</center>");
 }
 
+function HtmlError($message) {
+    print("<center>" . $message . "</center>");
+}
+
 function HtmlDebug($message) {
-    print('<div class=errorprint>' . $message . '</div>');
+    HtmlError($message);
 }
 
 ?>

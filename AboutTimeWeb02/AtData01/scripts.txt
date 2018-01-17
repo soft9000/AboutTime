@@ -1,7 +1,7 @@
 create table DBEVENT (
 ID integer primary key autoincrement,
 guid string not null,
-uid string,
+uid integer not null,
 localtime string not null,
 epochtime integer not null,
 stars integer not null,
@@ -15,6 +15,7 @@ email string,
 password text,
 weekStart integer,
 dayWindow integer,
+pageSize integer,
 payload text
 );
 

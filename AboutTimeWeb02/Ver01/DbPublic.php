@@ -166,12 +166,13 @@ class DbPublic {
         $br = false;
         $this->db->enableExceptions(true);
         try {
-            $cmd = $this->db->prepare('INSERT INTO DBUSER (ID, email, password, weekStart, dayWindow, payload) '
-                    . 'VALUES (NULL, :email, :password, :weekStart, :dayWindow, :payload);');
+            $cmd = $this->db->prepare('INSERT INTO DBUSER (ID, email, password, weekStart, dayWindow, pageSize, payload) '
+                    . 'VALUES (NULL, :email, :password, :weekStart, :dayWindow, :pageSize, :payload);');
             $cmd->bindParam(':email', $account->email, SQLITE3_TEXT);
             $cmd->bindParam(':password', $account->password, SQLITE3_TEXT);
             $cmd->bindParam(':weekStart', $account->weekStart, SQLITE3_INTEGER);
             $cmd->bindParam(':dayWindow', $account->dayWindow, SQLITE3_INTEGER);
+            $cmd->bindParam(':dayWindow', $account->pageSize, SQLITE3_INTEGER);
             $cmd->bindParam(':payload', $account->payload, SQLITE3_TEXT);
             $br = $cmd->execute();
         } catch (Exception $ex) {
@@ -189,15 +190,16 @@ class DbPublic {
         }
         HtmlDebug("<hr/>update x ID( $account->ID )<hr/>");
         $br = false;
-        if ($account->ID != -1) {
+        if ($account->ID > 0) {
             $this->db->enableExceptions(true);
             try {
-                $cmd = $this->db->prepare('UPDATE DBUSER SET email=:email, password=:password, weekStart=:weekStart, dayWindow=:dayWindow, payload=:payload '
+                $cmd = $this->db->prepare('UPDATE DBUSER SET email=:email, password=:password, weekStart=:weekStart, dayWindow=:dayWindow, pageSize=:pageSize, payload=:payload '
                         . " WHERE ID = '$account->ID';");
                 $cmd->bindParam(':email', $account->email, SQLITE3_TEXT);
                 $cmd->bindParam(':password', $account->password, SQLITE3_TEXT);
                 $cmd->bindParam(':weekStart', $account->weekStart, SQLITE3_INTEGER);
                 $cmd->bindParam(':dayWindow', $account->dayWindow, SQLITE3_INTEGER);
+                $cmd->bindParam(':pageSize', $account->pageSize, SQLITE3_INTEGER);
                 $cmd->bindParam(':payload', $account->payload, SQLITE3_TEXT);
                 $br = $cmd->execute();
             } catch (Exception $ex) {

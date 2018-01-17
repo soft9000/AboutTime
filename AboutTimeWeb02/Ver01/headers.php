@@ -16,6 +16,12 @@ include_once 'HtmlEcho.php';
 
 include_once 'IpTracker.php';
 
+// Request Headers
+include_once 'RequestAccount.php';
+include_once 'RequestEventList.php';
+include_once 'RequestEventFilter.php';
+
+// Entities
 include_once 'Database.php';
 include_once 'DbPublic.php';
 include_once 'DbUser.php';
@@ -29,6 +35,7 @@ include_once 'CodeWelcome.php';
 include_once 'CodeNavEvent.php';
 include_once 'CodeAccount.php';
 include_once 'CodeEvent.php';
+include_once 'CodeEventList.php';
 include_once 'CodeTimesheet.php';
 
 include_once 'CodeAPI.php'; // HTTP Forms-Request API

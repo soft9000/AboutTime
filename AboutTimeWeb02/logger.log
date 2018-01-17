@@ -22,3 +22,7 @@
 2017/12/15: 10.28.13 (LOCAL)	Added abstraction, scaffolding, and PHP Factory for an HTML Forms-Based API.
 2017/12/15: 16.05.05 (LOCAL)	Next / Previous operation working fine, as based upon epochtime.
 2017/12/26: 09.25.07 (LOCAL)	Uploaded to GitHub: Need to get back to some paying work ... Stopped with the implementation of the Forms Based (B.E.S.T & F.A.S.T) API.
+2018/01/07: 06.24.41 (LOCAL)	Uploaded basic / default account creation capability to GitHub.
+2018/01/16: 07.53.39 (LOCAL)	Paused at today's new CodeEventList.php
+2018/01/16: 14.56.07 (LOCAL)	CodeEventList: Plumbng works well. Needs beautification & click-to-edit re-direction.
+2018/01/17: 05.15.11 (LOCAL)	Event Pagination simplified + working well. Beautification underway.
