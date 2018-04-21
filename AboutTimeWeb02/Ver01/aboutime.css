@@ -56,6 +56,13 @@ body {
     color: darkblue;
 }
 
+.list_ro {
+    font-size:12px; 
+    background-color: green;
+    color: yellow;
+}
+
+
 .boxborder {
     border: 1px solid lightblue;
     border-radius: 7px;

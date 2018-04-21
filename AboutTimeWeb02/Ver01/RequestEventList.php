@@ -21,6 +21,7 @@ class RequestEventList extends RequestAccount {
     const dFirst = 30;
     const dLast = 40;
     const dPrev = 50;
+    const dEdit = 60;
     
     var $direction = RequestEventList::dRefresh;
     var $top_id = 1;

@@ -30,3 +30,4 @@
 2018/01/17: 05.49.21 (LOCAL)	Priority 0 bug found + fixed in AboutTimeWeb02/Ver01/DbPublic.php @ appendAccount() .
 2018/01/17: 05.59.36 (LOCAL)	Officially HTLM5-constrained any event's stars to be between 1 and 5.
 2018/04/21: 05.22.18 (LOCAL)	Added first + last page nav to list entries. Version 0.04. Uploaded to GitHub.
+2018/04/21: 08.13.02 (LOCAL)	Added ability to redirect so as to view / edit entry from the history list.

@@ -76,10 +76,14 @@ class DbPublic {
         $results = false;
         $guid = $event->eventGUID;
         if ($guid === -1) {
-            HtmlDebug("<hr/>read x ID(" . $event->ID . "," . $event->eventGUID . ")<hr/>");
-            $results = $this->db->query('SELECT * FROM DBEVENT ORDER BY ID LIMIT 1;');
+            HtmlDebug("<hr/>read x ID( $event->ID )<hr/>");
+            if ($event->ID <= 0) {
+                $results = $this->db->query('SELECT * FROM DBEVENT ORDER BY ID LIMIT 1;');
+            } else {
+                $results = $this->db->query("SELECT * FROM DBEVENT WHERE ID = $event->ID LIMIT 1;");
+            }
         } else {
-            HtmlDebug("<hr/>read X GUID(" . $event->ID . "," . $event->eventGUID . ")<hr/>");
+            HtmlDebug("<hr/>read X GUID( $event->ID , $event->eventGUID )<hr/>");
             $results = $this->db->query('SELECT * FROM DBEVENT WHERE GUID = "' . $guid . '" LIMIT 1;');
         }
         $row = $results->fetchArray();
@@ -126,7 +130,7 @@ class DbPublic {
     function readLast($event) {
         return $this->_readNext($event, "SELECT * FROM DBEVENT ORDER BY ID DESC LIMIT 1;");
     }
-    
+
     public function countAccounts() {
         $cmd = 'SELECT count(*) FROM DBUSER;';
         $rows = $this->db->query($cmd);

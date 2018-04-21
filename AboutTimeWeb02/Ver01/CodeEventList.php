@@ -33,7 +33,18 @@ class CodeEventList extends AbsFormProcessor {
         return "FormEventList";
     }
 
+    private function getEditButton($zname, $zrow) {
+        $result = "<input type='submit' name='$zname' class='buttonmedium' value='Edit ";
+        $result .= $zrow['ID'] . "'>";
+        return $result;
+    }
+
     protected function getFormResponse($request) {
+
+        if ($this->req->direction == RequestEventList::dEdit) {
+            HtmlDebug("Edit $this->op");
+            return;
+        }
         $zname = $this->getFormName();
         $event = new RowEvent();
 
@@ -62,20 +73,26 @@ class CodeEventList extends AbsFormProcessor {
 
         $result .= "\n";
         $result .= '    <tr><td></td><td><input name="top_id" value="' . $this->req->top_id . '" hidden></td>';
-        $result .= "\n";
-        $result .= '</form>';
-        
+
         if ($data != False) {
+            $result .= '<table>';
             foreach ($data as $zrow) {
-                $str = $zrow['ID'] . ', ' . $zrow['subject'] . ', ' . $zrow['stars'];
-                $result .= "$str </br>";
+                $str = '<tr><td>' . $this->getEditButton($zname, $zrow) 
+                        . '</td><td width="50" class="list_ro">&nbsp;&nbsp;' . $zrow['stars'] 
+                        . '</td><td class="list_ro">&nbsp;&nbsp; ' . $zrow['localtime'] . '&nbsp;&nbsp;' 
+                        . '</td><td width="300" class="list_ro">&nbsp;&nbsp;' . $zrow['subject'] 
+                        . '&nbsp;&nbsp;...'
+                        . '</td></tr>';
+                $result .= "$str\n";
             }
+            $result .= "</table>";
         } else {
             $result .= "False?!";
         }
         // END DETAIL FORM
+        $result .= "\n";
+        $result .= '</form>';
 
-        $result .= 'bingo';
         return $result;
     }
 
@@ -87,6 +104,15 @@ class CodeEventList extends AbsFormProcessor {
         }
         $this->op = trim($tmp);
 
+        // CHECK: PROCESS a selected Edit request?
+        $vals = explode(' ', $this->op);
+        if ($vals[0] == 'Edit') {
+            // Mark state - just in case!
+            $this->req->direction = RequestEventList::dEdit;
+            $this->op = trim($vals[1]);
+            return true;
+        }
+        // NORMAL MENU SELECTIONS:
         switch ($this->op) {
             case 'First':
                 $this->req->direction = RequestEventList::dFirst;
@@ -125,7 +151,22 @@ class CodeEventList extends AbsFormProcessor {
     protected function doFormRequest() {
         $br = false;
         if ($this->readFrom_REQUEST()) {
-            // Okay
+            if ($this->req->direction == RequestEventList::dEdit) {
+                // Attempt redirect:
+                $ip = new IpTracker();
+                $db = Database::OpenDatabase($ip);
+                $event = new RowEvent();
+                $event->ID = $this->op;
+                $event->eventGUID = -1;
+                if ($db->read($event) == true) {
+                    // Re-direct to CodeEvent editor ...
+                    $result = new CodeEvent();
+                    $result->setRedirect($this, $event);
+                    return $result;
+                } else {
+                    HtmlDebug("Unable to locate record!");
+                }
+            }
         }
         return $this;
     }
