@@ -74,13 +74,28 @@ class DbUser extends DbPublic {
         }
     }
 
-    private function get_page($account, $top_id, $page_size, $dirFirst) {
-        $cmd = "SELECT * FROM DBEVENT WHERE (UID = $account->ID AND ID $dirFirst $top_id) ORDER BY ID ";
-        if ($dirFirst[0] == '<') {
-            $cmd .= ' DESC ';
+    private function get_cmd($account, $top_id, $page_size, $dirFirst) {
+        switch ($dirFirst[0]) {
+            case '$':
+                $cmd = "SELECT * FROM DBEVENT WHERE (UID = $account->ID AND ID >= 1) ORDER BY ID ";
+                break;
+            case '!':
+                $cmd = "SELECT * FROM DBEVENT WHERE (UID = $account->ID) ORDER BY ID DESC ";
+                break;
+            default:
+                $cmd = "SELECT * FROM DBEVENT WHERE (UID = $account->ID AND ID $dirFirst $top_id) ORDER BY ID ";
+                if ($dirFirst[0] == '<') {
+                    $cmd .= ' DESC ';
+                }
+                break;
         }
-        $cmd .= " LIMIT $page_size ;";
 
+        $cmd .= " LIMIT $page_size ;";
+        return $cmd;
+    }
+
+    private function get_page($account, $top_id, $page_size, $dirFirst) {
+        $cmd = $this->get_cmd($account, $top_id, $page_size, $dirFirst);
         HtmlDebug($cmd);
         $rows = $this->db->query($cmd);
         $result = array();
@@ -114,9 +129,12 @@ class DbUser extends DbPublic {
             $nav->page_size = RequestAccount::SZPAGE_DEFAULT;
         }
 
+        $op = '$';
+
         switch ($nav->direction) {
             case RequestEventList::dNext:
-                $data = $this->get_page($account, $nav->top_id, $nav->page_size, '>=');
+                $op = '>=';
+                $data = $this->get_page($account, $nav->top_id, $nav->page_size, $op);
                 if ($data != False && count($data) != 0) {
                     $which = count($data) - 1;
                     $nav->top_id = $data[$which]['ID'];
@@ -124,7 +142,26 @@ class DbUser extends DbPublic {
                 }
                 break;
             case RequestEventList::dPrev:
-                $data = $this->get_page($account, $nav->top_id, $nav->page_size, '<=');
+                $op = '<=';
+                $data = $this->get_page($account, $nav->top_id, $nav->page_size, $op);
+                if ($data != False && count($data) != 0) {
+                    $which = count($data) - 1;
+                    $nav->top_id = $data[$which]['ID'];
+                    HtmlDebug("dPrev " . count($data) . " " . $nav->top_id);
+                }
+                break;
+            case RequestEventList::dLast:
+                $op = '!';
+                $data = $this->get_page($account, $nav->top_id, $nav->page_size, $op);
+                if ($data != False && count($data) != 0) {
+                    $which = count($data) - 1;
+                    $nav->top_id = $data[$which]['ID'];
+                    HtmlDebug("dPrev " . count($data) . " " . $nav->top_id);
+                }
+                break;
+            case RequestEventList::dFirst:
+                $op = '$';
+                $data = $this->get_page($account, $nav->top_id, $nav->page_size, $op);
                 if ($data != False && count($data) != 0) {
                     $which = count($data) - 1;
                     $nav->top_id = $data[$which]['ID'];
@@ -135,7 +172,10 @@ class DbUser extends DbPublic {
                 break;
         }
 
-        $cmd = "SELECT * FROM DBEVENT WHERE (UID = $account->ID AND ID >= $nav->top_id) ORDER BY ID LIMIT $nav->page_size ;";
+        if ($op == '$') {
+            $nav->top_id = 1;
+        }
+        $cmd = $this->get_cmd($account, $nav->top_id, $nav->page_size, ">=");
         HtmlDebug($cmd);
         $rows = $this->db->query($cmd);
         if ($rows != False) {

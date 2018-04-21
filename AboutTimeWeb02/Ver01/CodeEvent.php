@@ -89,7 +89,7 @@ class CodeEvent extends AbsFormProcessor {
         // STOP MENU BUTTONS
         $result .= '    <tr><td class="field_lbl_ro">Time:</td> <td><input name="localtime_tick" id="localtime_tick" class="notebox" value="' . $this->event->localtime . '" readonly></td></tr>';
         $result .= "\n";
-        $result .= '    <tr><td class="field_lbl_ro">Stars:</td> <td><input name="stars" class="field_txt" value="' . $this->event->stars . '"></td></tr>';
+        $result .= '    <tr><td class="field_lbl_ro">Stars:</td> <td><input type="number" min="1" max="5" name="stars" class="field_txt" value="' . $this->event->stars . '"></td></tr>';
         $result .= "\n";
         $result .= '    <tr><td class="field_lbl_ro">Subject:</td> <td><input name="subject" class="field_txt" value="' . $this->event->subject . '"></td></tr>';
         $result .= "\n";

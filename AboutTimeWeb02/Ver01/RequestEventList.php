@@ -16,10 +16,12 @@ include_once 'RequestAccount.php';
 class RequestEventList extends RequestAccount {
     
     // Directions
-    const dRefrest = 10;
+    const dRefresh = 10;
     const dNext = 20;
-    const dPrev = 30;
+    const dFirst = 30;
+    const dLast = 40;
+    const dPrev = 50;
     
-    var $direction = RequestEventList::dRefrest;
+    var $direction = RequestEventList::dRefresh;
     var $top_id = 1;
 }

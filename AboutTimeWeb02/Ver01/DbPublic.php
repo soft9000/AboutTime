@@ -123,6 +123,10 @@ class DbPublic {
         return $this->_readNext($event, "SELECT * FROM DBEVENT WHERE (epochtime < $event->epochtime) ORDER BY epochtime DESC LIMIT 1;");
     }
 
+    function readLast($event) {
+        return $this->_readNext($event, "SELECT * FROM DBEVENT ORDER BY ID DESC LIMIT 1;");
+    }
+    
     public function countAccounts() {
         $cmd = 'SELECT count(*) FROM DBUSER;';
         $rows = $this->db->query($cmd);
@@ -172,7 +176,7 @@ class DbPublic {
             $cmd->bindParam(':password', $account->password, SQLITE3_TEXT);
             $cmd->bindParam(':weekStart', $account->weekStart, SQLITE3_INTEGER);
             $cmd->bindParam(':dayWindow', $account->dayWindow, SQLITE3_INTEGER);
-            $cmd->bindParam(':dayWindow', $account->pageSize, SQLITE3_INTEGER);
+            $cmd->bindParam(':pageSize', $account->pageSize, SQLITE3_INTEGER);
             $cmd->bindParam(':payload', $account->payload, SQLITE3_TEXT);
             $br = $cmd->execute();
         } catch (Exception $ex) {
@@ -181,7 +185,6 @@ class DbPublic {
         $this->db->enableExceptions(false);
         return $br;
     }
-
 
     function updateAccount($account) {
         if (is_a($account, 'RowAccount') === false || $account->ID < 0) {

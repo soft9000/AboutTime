@@ -34,7 +34,6 @@ class CodeEventList extends AbsFormProcessor {
     }
 
     protected function getFormResponse($request) {
-
         $zname = $this->getFormName();
         $event = new RowEvent();
 
@@ -44,8 +43,10 @@ class CodeEventList extends AbsFormProcessor {
 
         // START MENU BUTTONS
         $result .= "\n <tr><td></td><td>";
+        $result .= '<input type="submit" name="' . $zname . '" class="buttonmedium" value="First">';
         $result .= '<input type="submit" name="' . $zname . '" class="buttonmedium" value="Prev">';
         $result .= '<input type="submit" name="' . $zname . '" class="buttonmedium" value="Next">';
+        $result .= '<input type="submit" name="' . $zname . '" class="buttonmedium" value="Last">';
 
         $result .= "<hr></td></tr>\n";
         // STOP MENU BUTTONS
@@ -87,14 +88,20 @@ class CodeEventList extends AbsFormProcessor {
         $this->op = trim($tmp);
 
         switch ($this->op) {
+            case 'First':
+                $this->req->direction = RequestEventList::dFirst;
+                break;
             case 'Prev':
                 $this->req->direction = RequestEventList::dPrev;
                 break;
             case 'Next':
                 $this->req->direction = RequestEventList::dNext;
                 break;
+            case 'Last':
+                $this->req->direction = RequestEventList::dLast;
+                break;
             default:
-                $this->req->direction = RequestEventList::dRefrest;
+                $this->req->direction = RequestEventList::dRefresh;
         }
 
         $tmp = $this->getForm('accountID');

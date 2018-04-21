@@ -26,3 +26,7 @@
 2018/01/16: 07.53.39 (LOCAL)	Paused at today's new CodeEventList.php
 2018/01/16: 14.56.07 (LOCAL)	CodeEventList: Plumbng works well. Needs beautification & click-to-edit re-direction.
 2018/01/17: 05.15.11 (LOCAL)	Event Pagination simplified + working well. Beautification underway.
+2018/01/17: 05.38.45 (LOCAL)	Uploaded to GitHub.
+2018/01/17: 05.49.21 (LOCAL)	Priority 0 bug found + fixed in AboutTimeWeb02/Ver01/DbPublic.php @ appendAccount() .
+2018/01/17: 05.59.36 (LOCAL)	Officially HTLM5-constrained any event's stars to be between 1 and 5.
+2018/04/21: 05.22.18 (LOCAL)	Added first + last page nav to list entries. Version 0.04. Uploaded to GitHub.

@@ -1,8 +1,8 @@
 <?php
 
-$COPYRIGHT = '<div class="smallprint"><br>About Time System. Version 0.03. Created <b>2017-11-28</b><br></div>';
+$COPYRIGHT = '<div class="smallprint"><br>About Time System. Version 0.04. Created <b>2017-11-28</b><br></div>';
 
-$WEBROOT = 'http://localhost:9000';
+$WEBROOT = 'http://localhost:8000';
 $ZADMIN = 'YourPassword';
 $ZPUBLIC = 'PUBLIC';
 $DBFILE = '../AtData01/AboutTime2017.sqlt3';

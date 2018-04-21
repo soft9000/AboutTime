@@ -1,5 +1,7 @@
 <?php
 
+$VERBOSE = FALSE;
+
 function HtmlPrint($message) {
     return ("<center>" . $message . "</center>");
 }
@@ -9,7 +11,10 @@ function HtmlEcho($message) {
 }
 
 function HtmlError($message) {
-    print("<center>" . $message . "</center>");
+    global $VERBOSE;
+    if ($VERBOSE == TRUE) {
+        print("<center>" . $message . "</center>");
+    }
 }
 
 function HtmlDebug($message) {
