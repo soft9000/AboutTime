@@ -1,7 +1,7 @@
 # AboutTime
 This 'repo is about creating your own time tracking &amp; event logging user interfece, on the 'Web. The web expereince, as well as the internal code design is pretty sexy... even if I do say so, myself ... =)
 
-Note that this project is dedicated to hosting your own web-based (PHP) user interface. Those without their own web site should be aware that an even MORE sexy, classic 'App to run on your Linux / MS Windows Desktops, is also avaialble on Sourceforge @ https://sourceforge.net/projects/abouttime/ .
+Note that this project is dedicated to hosting your own web-based (PHP) user interface. Those without their own web site should be aware that an even MORE sexy, classic 'App to run on your Linux / MS Windows Desktops, is also available on Sourceforge @ https://sourceforge.net/projects/abouttime/ .
 
 # Notes
 Because PHP projects are usually a nightmare to develop & maintain, in this project we also decided to demonstrate a clean, object-oriented, coding experience. 
