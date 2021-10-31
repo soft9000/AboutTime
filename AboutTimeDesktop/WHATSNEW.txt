@@ -1,0 +1,27 @@
+AboutTime integrates with our command-line `ezlog` logging tool. Change made at the command line are automatically detected by the Desktop App.
+
+What's New:
+
+(1) NEW TRUST-ME MODE
+    Log-entry time(s) can now be edited.
+
+(2) NEW WEEK-VIEW MODE
+    Weekly entries can be HTML exported, as well as "time-carded."
+
+(3) NEW WEEK-STARTED PARSER
+    Start your week on any day. Handy for #2 (above.)
+
+(4) NEW AUTOMATIC SORTING
+    Log-files sorted whenever (1) is detected.
+
+(5) CSV & HTLM legacy preserved.
+
+(6) Spreadsheet import / export for spell checking, editing (etc) is fully supported.
+
+
+
+Enjoy,
+
+
+Randall Nagy
+President, Soft9000.com
