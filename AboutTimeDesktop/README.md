@@ -10,15 +10,15 @@ After awhile, using AboutTime encourages us to do more each day, By encouraging 
 
 Features:
 
-Document Time Spent on Tasks & Projects
-Analyze Tough Technical Problems
-Track & Prioritize Daily Work Activities
-Filter & Export Activities based upon "Hotel Rankings"
-Easy to Understand Calculator Metaphore
-Create Colorized, Weekly Reports (HTML)
-Automatically Create Time-Card Information
-CSV Export / Import (Spreadsheet Support / Editing, etc.)
-Record & Review Voice Notes
-NEW - Date / Time Editing
-NEW - Automatic Date / Time Sorting
-NEW - Automatic WEEKLY TIME SHEET Creation
+* Document Time Spent on Tasks & Projects
+* Analyze Tough Technical Problems
+* Track & Prioritize Daily Work Activities
+* Filter & Export Activities based upon "Hotel Rankings"
+* Easy to Understand Calculator Metaphore
+* Create Colorized, Weekly Reports (HTML)
+* Automatically Create Time-Card Information
+* CSV Export / Import (Spreadsheet Support / Editing, etc.)
+* Record & Review Voice Notes
+* NEW - Date / Time Editing
+* NEW - Automatic Date / Time Sorting
+* NEW - Automatic WEEKLY TIME SHEET Creation
