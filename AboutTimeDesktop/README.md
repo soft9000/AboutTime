@@ -6,7 +6,7 @@ AboutTime also supports troubleshooting & problem detection. By allowing us prio
 
 No time to write things down? Relax: AboutTime also has a simple voice-note recording feature. Now we can keep track of what we saw and did, as well as when we first noticed. All real-time data-captured for thoughtful review / annotation later-on.
 
-After awhile, using AboutTime encourages us to do more each day, By encouraging us to do more, AboutTime also allows us to become a lot more productive. Over time, most discover that using AboutTime will help us stand head-and-shoulders above the competition.
+After awhile, using AboutTime encourages us to do more each day. By encouraging us to do more, AboutTime also allows us to become a lot more productive. Over time, most discover that using AboutTime will help us stand head-and-shoulders above the competition.
 
 Features:
 
