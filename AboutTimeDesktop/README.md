@@ -22,3 +22,5 @@ Features:
 * NEW - Date / Time Editing
 * NEW - Automatic Date / Time Sorting
 * NEW - Automatic WEEKLY TIME SHEET Creation
+
+We've also a [new video](https://www.youtube.com/watch?v=ohJfGX-EjoU), as well as a [group on Facebook](https://www.facebook.com/groups/abouttime9000)
