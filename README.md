@@ -5,17 +5,17 @@ Along that same theme, I have also discovered - for most professionals  - that w
 
 Others need a more over-the-shoulders approach?
 
-In as much as keeping track of our daily activites is a great way to inspire us to do better, I created both a 'Web, as well as a 'Desktop way to so do.
+In as much as keeping track of our daily activities is a great way to inspire us to do better, I created both a 'Web, as well as a 'Desktop way to so do.
 
 AboutTime: CONSOLE EDITIONS
 =====
 The [AboutTime C++ Edition](https://github.com/soft9000/era/tree/master/cpp) updates an `.ezlog` file. The `.ezlog` file can also be monitored & updated in real-time by the [AboutTime Desktop](https://github.com/soft9000/AboutTime/tree/master/AboutTimeDesktop) GUI.
 
-(Note: The [Python Editions](https://github.com/soft9000/era/blob/master/ezlog03.py) are stand alone. -Part of my [DevOps](https://www.udemy.com/course/python-4000-gnu-devops) educational opportunuty.)
+(Note: The [Python Editions](https://github.com/soft9000/era/blob/master/ezlog03.py) are stand alone. -Part of my [DevOps](https://www.udemy.com/course/python-4000-gnu-devops) educational opportunity.)
 
 AboutTime: WEB EDITION
 ==========
-The [AboutTime Web](https://github.com/soft9000/AboutTime/tree/master/AboutTimeWeb02) 'repo is about creating your own time tracking &amp; event logging user interface, on the 'Web. The web expereince, as well as the internal code design is pretty sexy... even if I do say so, myself ... =)
+The [AboutTime Web](https://github.com/soft9000/AboutTime/tree/master/AboutTimeWeb02) 'repo is about creating your own time tracking &amp; event logging user interface, on the 'Web. The web experience, as well as the internal code design is pretty sexy... even if I do say so, myself ... =)
 
 Because PHP projects are usually a nightmare to develop & maintain, in this project we also decided to demonstrate a clean, object-oriented, coding experience. 
 
@@ -31,3 +31,4 @@ Until the rewrite, interested parties might enjoy ***Python 3000: Creating and T
 https://www.udemy.com/webdev-3000/
 
 (Yes, we can use Python to test PHP - or anything else W3C - as well =)
+
