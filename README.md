@@ -23,6 +23,10 @@ AboutTime: DESKTOP EDITION
 ==========
 Those without their own web site should be aware that an even MORE sexy, classic 'App to run on your Linux / MS Windows Desktops, is also available in the [AboutTime Desktop](https://github.com/soft9000/AboutTime/tree/master/AboutTimeDesktop) project folder.
 
+## zSupport?
+If you want to support the effort, I seek no donations. Instead, simply feel free to purchase one of [my educational](https://www.udemy.com/user/randallnagy2/) or [printed](https://www.amazon.com/Randall-Nagy/e/B08ZJLH1VN?ref=sr_ntt_srch_lnk_1&qid=1660050704&sr=8-1) productions?
+
+
 # Notes
 This 'Web Project will also be re-written in Python 3... possibly using PEP 3333. 
 
