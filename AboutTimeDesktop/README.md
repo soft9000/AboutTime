@@ -1,3 +1,5 @@
+![Unofficial Logo](https://github.com/soft9000/AboutTime/blob/master/GitAboutTime.png)
+# AboutTime - Desktop
 Having trouble remembering what you did last week? Do you need to create a status report? Surely consultants need to assure clients that they have been earning their pay.
 
 It is amazing how many tasks one can do, yet omit: AboutTime allows us to create meaningful, task-based status reports.
