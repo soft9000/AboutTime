@@ -1,3 +1,4 @@
+![PUnofficial Logo](https://github.com/soft9000/AboutTime/blob/master/GitAboutTime.png)
 # AboutTime
 I believe that happiness in the workplace - as well as elsewhere - is often about doing our best. Giving others a good day's work, for a good day's pay?
 
